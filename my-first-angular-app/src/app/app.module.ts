@@ -7,8 +7,9 @@ import { AppComponent } from './app.component';
   declarations: [
     AppComponent
   ],
+//let Angular know that we import packages for him
   imports: [
-    BrowserModule
+    BrowserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
