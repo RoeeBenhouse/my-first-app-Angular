@@ -1,0 +1,18 @@
+<button
+class="btn btn-primary"
+[disabled]=false
+(click)="onDisplayDetails()"
+> {{!displayDetails ? 'Display details' : 'Hide'}}
+</button>
+
+<p *ngIf="displayDetails else hideDetails">
+  This is stupid text for assignment 3 - Angular course.....
+</p>
+<ng-template #hideDetails><p></p></ng-template>
+
+<p
+  *ngFor="let click of allClicks; let i = index"
+  [ngStyle]="{background: i >= 4 ? 'blue' : 'white'}"
+  [ngClass]="{after5 : i >= 4}">
+  {{click}}
+</p>

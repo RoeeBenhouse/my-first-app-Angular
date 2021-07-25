@@ -1,0 +1,15 @@
+<label>Server Name </label>
+<!--Two way Data Binding-->
+<input
+  type="text"
+  class="form-control"
+  [(ngModel)]="serverName">
+<button
+  class="btn btn-primary"
+  [disabled]="!allowNewServer"
+  (click)="onCreatServer()"> Add Server </button>
+<p *ngIf="serverCreated; else noServerCreated"> {{serverCreation}} </p>
+<ng-template #noServerCreated> <p>No server was created! </p> </ng-template>
+
+<app-server *ngFor="let server of servers"></app-server>
+
