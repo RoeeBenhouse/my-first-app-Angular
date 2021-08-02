@@ -1,0 +1,19 @@
+<h1>Assignment 4 - Even Or Odd</h1>
+
+<hr>
+<div class="row">
+  <div class="col-xs-12">
+    <app-game-control
+    (intervalEvent) = "onIntervalFired($event)"></app-game-control>
+
+    <app-odd
+      *ngFor="let oddNum of odds"
+      [number]="oddNum">
+    </app-odd>
+
+    <app-even
+      *ngFor="let evenNum of evens"
+      [number]="evenNum">
+    </app-even>
+  </div>
+</div>
