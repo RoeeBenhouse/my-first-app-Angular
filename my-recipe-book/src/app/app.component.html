@@ -1,10 +1,12 @@
-<app-header></app-header>
-
+<app-header
+  (recipeClicked) = onNavigate($event)
+  (shoppingListClicked) = onNavigate($event)
+></app-header>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <app-recipe-book></app-recipe-book>
-      <app-shopping-list></app-shopping-list>
+      <app-recipe-book *ngIf="pageNum === 1" ></app-recipe-book>
+      <app-shopping-list *ngIf="pageNum === 2"></app-shopping-list>
     </div>
   </div>
 </div>

@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'my-recipe-book';
+  pageNum: number = 1;
+
+  onNavigate(page: string) {
+    this.pageNum = (page === 'recipes') ? 1 :
+      (page === 'shoppingList') ? 2 : 0;
+  }
 }
