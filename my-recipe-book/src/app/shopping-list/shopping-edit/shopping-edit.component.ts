@@ -1,5 +1,6 @@
-import {Component, OnInit, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, ViewChild, ElementRef} from '@angular/core';
 import {Ingredient} from "../../shared/ingredient.model";
+import {ShoppingListService} from "../shopping-list.service";
 
 @Component({
   selector: 'app-shopping-edit',
@@ -9,29 +10,28 @@ import {Ingredient} from "../../shared/ingredient.model";
 export class ShoppingEditComponent implements OnInit {
   @ViewChild('nameInput', {static: true}) nameInputRef!: ElementRef;
   @ViewChild('amountInput', {static: true}) amountInputRef!: ElementRef;
-  @Output() editIngredients = new EventEmitter<{ ingredient : Ingredient, action : string }>();
 
-  constructor() { }
+  constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
   }
 
   onAddIngredient() {
-    this.editIngredients.emit(
-      { ingredient : new Ingredient(this.nameInputRef.nativeElement.value,
-                                  parseInt(this.amountInputRef.nativeElement.value)),
-              action : "add" });
+    const nameInput = this.nameInputRef.nativeElement.value;
+    const amountInput = parseInt(this.amountInputRef.nativeElement.value);
+    const ingredientToAdd = new Ingredient(nameInput, amountInput);
+    this.shoppingListService.onAction({ingredient: ingredientToAdd, action : "add"});
   }
 
   onDeleteIngredient() {
-    this.editIngredients.emit(
-      { ingredient : new Ingredient(this.nameInputRef.nativeElement.value,
-          parseInt(this.amountInputRef.nativeElement.value)),
-        action : "delete" });
+    const nameInput = this.nameInputRef.nativeElement.value;
+    const amountInput = parseInt(this.amountInputRef.nativeElement.value);
+    const ingredientToDelete = new Ingredient(nameInput, amountInput);
+    this.shoppingListService.onAction({ingredient: ingredientToDelete, action : "delete"});
   }
 
   onClearIngredients() {
-    this.editIngredients.emit(
-      { ingredient : new Ingredient("", 0), action : "clear" });
+    const ingredientToDelete = new Ingredient("never mind", 0);
+    this.shoppingListService.onAction({ingredient: ingredientToDelete, action : "clear"});
   }
 }
